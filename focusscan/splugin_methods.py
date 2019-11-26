@@ -1,5 +1,5 @@
-from PyQt4 import QtGui, QtCore
-from PyQt4.QtGui import QMainWindow
+from PyQt5 import QtGui, QtCore
+from PyQt5.QtWidgets import QMainWindow
 import matplotlib
 
 import matplotlib.pyplot as plt

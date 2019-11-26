@@ -4,10 +4,11 @@ import numpy as np
 
 
 import sys,os
-from PyQt4 import QtGui, QtCore
-from PyQt4.QtGui import QMainWindow,QComboBox, QDoubleSpinBox, QAction, QWidget, QLabel,QTreeView,QAbstractItemView
-from PyQt4.QtGui import QSpinBox,QListView,QHBoxLayout,QPushButton,QTextEdit,QIcon,QTableWidget,QVBoxLayout,QLineEdit,QSplitter
-from PyQt4.QtGui import QCheckBox, QStatusBar,QApplication,QTabWidget, QGroupBox,QFileDialog
+from PyQt5 import QtGui, QtCore
+from PyQt5.QtWidgets import QMainWindow,QComboBox, QDoubleSpinBox, QAction, QWidget, QLabel,QTreeView,QAbstractItemView
+from PyQt5.QtWidgets import QSpinBox,QListView,QHBoxLayout,QPushButton,QTextEdit,QTableWidget,QVBoxLayout,QLineEdit,QSplitter
+from PyQt5.QtWidgets import QCheckBox, QStatusBar,QApplication,QTabWidget, QGroupBox,QFileDialog
+from PyQt5.Qt import QIcon
 import matplotlib
 matplotlib.use('Agg') # before import pylab
 
@@ -326,7 +327,7 @@ class Window(QWidget):
 		#The table which shows the details of each correlated file. 
 		self.modelTab2 = QTableWidget(self)
 
-		self.carpet_browser = QtGui.QMainWindow()
+		self.carpet_browser = QMainWindow()
 		self.carpet_browser.setWindowTitle('File browser window')
 		self.carpet_browser.modelTab2 = self.modelTab2
 		
@@ -344,7 +345,7 @@ class Window(QWidget):
 		self.carpet_browser.modelTab2.setColumnWidth(5,100);
 		self.carpet_browser.modelTab2.horizontalHeader().setStretchLastSection(True)
 		self.carpet_browser.modelTab2.resize(800,400)
-		self.carpet_browser.modelTab2.setHorizontalHeaderLabels(QtCore.QString(",data name,plot, file name,,file path").split(","))
+		self.carpet_browser.modelTab2.setHorizontalHeaderLabels(",data name,plot, file name,,file path".split(","))
 
 		self.carpet_browser.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint)
 		
@@ -363,7 +364,7 @@ class Window(QWidget):
 		self.modelTab.horizontalHeader().setStretchLastSection(True)
 		
 		self.modelTab.setMinimumSize(340,200)
-		self.modelTab.setHorizontalHeaderLabels(QtCore.QString(",From: , ,To: ,, , , , ").split(","))
+		self.modelTab.setHorizontalHeaderLabels(",From: , ,To: ,, , , , ".split(","))
 
 		
 
@@ -2066,14 +2067,15 @@ def start_gui():
 		event.accept()
 	win_tab.closeEvent = closeEvent
 
-	win_tab.setStyleSheet("""QTabWidget{
+	"""win_tab.setStyleSheet("""
+	"""QTabWidget{
 	background:qradialgradient(cx: 0.3, cy: -0.4,
 								fx: 0.3, fy: -0.4,
 								radius: 1.9, stop: 0 #fff, stop: 1 #888);
 								}
 								
 
-	""")
+	)"""
 	
 
 	

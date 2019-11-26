@@ -1,7 +1,7 @@
 import struct
 from xml.etree import ElementTree as ET
-from PyQt4 import QtGui, QtCore
-from PyQt4.QtGui import QDialog 
+from PyQt5 import QtGui, QtCore
+from PyQt5.QtWidgets import QDialog 
 import warnings
 import numpy as np
 import tifffile as tif_fn
