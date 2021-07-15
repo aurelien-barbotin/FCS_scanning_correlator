@@ -13,7 +13,7 @@ from matplotlib.patches import Rectangle
 from matplotlib.font_manager import FontProperties
 from matplotlib.widgets import Slider, SpanSelector
 from scorrelation_objects import scanObject, autocorrelate, correlate
-import pickle as pickle
+import cPickle as pickle
 
 class bleachCorr2(QMainWindow):
     def __init__(self,par_obj,win_obj):
@@ -344,7 +344,7 @@ class bleachCorr2(QMainWindow):
                 
             
             if self.objId.CH0.shape[0]-num_of_lines+1< 0:
-                print('Time interval exceeds the allowed range for: '+self.objId.name+' please use shorter time interval.')
+                print 'Time interval exceeds the allowed range for: '+self.objId.name+' please use shorter time interval.'
                 self.win_obj.image_status_text.showMessage('Time interval exceeds the allowed range for: '+self.objId.name+' please use shorter time interval.')
                 self.win_obj.image_status_text.setStyleSheet("color : red")
                 self.win_obj.fit_obj.app.processEvents()
@@ -1504,7 +1504,7 @@ class bleachCorr(QMainWindow):
         #Calculate the total integral
         totalFn = np.sum(self.objId.CH0, 1).astype(np.float64)
         #Plot 1 in 10 pixels from the Gasussian.
-        self.plt1.plot(list(range(0,totalFn.shape[0],10)) ,totalFn[0::10],'blue')
+        self.plt1.plot(range(0,totalFn.shape[0],10) ,totalFn[0::10],'blue')
         #If plotting with correction:
         if self.corrFn == True:
             
@@ -1516,8 +1516,8 @@ class bleachCorr(QMainWindow):
             self.equation_tb1.setText(str(np.round(1/self.learn_tb,5)))
             out_total_fn = self.apply_corr_fn(totalFn,1)
             
-            self.plt1.plot(list(range(0,out_total_fn.shape[0],10)) ,out_total_fn[0::10], 'green')
-            self.plt1.plot(list(range(0,out_total_fn.shape[0],10)) ,self.weightings[0::10], 'red')
+            self.plt1.plot(range(0,out_total_fn.shape[0],10) ,out_total_fn[0::10], 'green')
+            self.plt1.plot(range(0,out_total_fn.shape[0],10) ,self.weightings[0::10], 'red')
             
             
             self.plt1.set_ylim(bottom=0)
@@ -1531,7 +1531,7 @@ class bleachCorr(QMainWindow):
             #Calculate the total integral
             totalFn = np.sum(self.objId.CH1, 1).astype(np.float64)
             #Plot 1 in 10 pixels from the Gasussian.
-            self.plt2.plot(list(range(0,totalFn.shape[0],10)) ,totalFn[0::10],'grey')
+            self.plt2.plot(range(0,totalFn.shape[0],10) ,totalFn[0::10],'grey')
             #If plotting with correction:
             if self.corrFn == True:
                 
@@ -1543,8 +1543,8 @@ class bleachCorr(QMainWindow):
                 self.equation_tb2.setText(str(1/np.round(self.learn_tb,5)))
                 out_total_fn = self.apply_corr_fn(totalFn,1)
                 
-                self.plt2.plot(list(range(0,out_total_fn.shape[0],10)) ,out_total_fn[0::10], 'green')
-                self.plt2.plot(list(range(0,out_total_fn.shape[0],10)) ,self.weightings[0::10], 'red')
+                self.plt2.plot(range(0,out_total_fn.shape[0],10) ,out_total_fn[0::10], 'green')
+                self.plt2.plot(range(0,out_total_fn.shape[0],10) ,self.weightings[0::10], 'red')
                 
                 
                 self.plt2.set_ylim(bottom=0)
@@ -1742,7 +1742,7 @@ class SpotSizeCalculation(QMainWindow):
         #Calculate the total integral
         totalFn = np.sum(self.objId.CH0, 1).astype(np.float64)
         #Plot 1 in 10 pixels from the Gasussian.
-        self.plt1.plot(list(range(0,totalFn.shape[0],10)) ,totalFn[0::10],'blue')
+        self.plt1.plot(range(0,totalFn.shape[0],10) ,totalFn[0::10],'blue')
         #If plotting with correction:
         if self.corrFn == True:
             
@@ -1752,8 +1752,8 @@ class SpotSizeCalculation(QMainWindow):
             self.equation_tb1.setText(str(np.round(1/self.learn_tb,5)))
             out_total_fn = self.apply_corr_fn(totalFn,1)
             
-            self.plt1.plot(list(range(0,out_total_fn.shape[0],10)) ,out_total_fn[0::10], 'green',linewidth=1.0)
-            self.plt1.plot(list(range(0,out_total_fn.shape[0],10)) ,self.weightings[0::10], 'red',linewidth=1.0)
+            self.plt1.plot(range(0,out_total_fn.shape[0],10) ,out_total_fn[0::10], 'green',linewidth=1.0)
+            self.plt1.plot(range(0,out_total_fn.shape[0],10) ,self.weightings[0::10], 'red',linewidth=1.0)
             
             
             self.plt1.set_ylim(bottom=0)
@@ -1767,7 +1767,7 @@ class SpotSizeCalculation(QMainWindow):
             #Calculate the total integral
             totalFn = np.sum(self.objId.CH1, 1).astype(np.float64)
             #Plot 1 in 10 pixels from the Gasussian.
-            self.plt2.plot(list(range(0,totalFn.shape[0],10)) ,totalFn[0::10],'grey')
+            self.plt2.plot(range(0,totalFn.shape[0],10) ,totalFn[0::10],'grey')
             #If plotting with correction:
             if self.corrFn == True:
                 
@@ -1777,8 +1777,8 @@ class SpotSizeCalculation(QMainWindow):
                 self.equation_tb2.setText(str(1/np.round(self.learn_tb,5)))
                 out_total_fn = self.apply_corr_fn(totalFn,1)
                 
-                self.plt2.plot(list(range(0,out_total_fn.shape[0],10)) ,out_total_fn[0::10], 'green',linewidth=1.0)
-                self.plt2.plot(list(range(0,out_total_fn.shape[0],10)) ,self.weightings[0::10], 'red',linewidth=1.0)
+                self.plt2.plot(range(0,out_total_fn.shape[0],10) ,out_total_fn[0::10], 'green',linewidth=1.0)
+                self.plt2.plot(range(0,out_total_fn.shape[0],10) ,self.weightings[0::10], 'red',linewidth=1.0)
                 
                 
                 self.plt2.set_ylim(bottom=0)

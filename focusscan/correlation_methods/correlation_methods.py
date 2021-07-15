@@ -1,5 +1,5 @@
 import numpy as np
-import fib4
+# import fib4
 import time
 import _thread
 
@@ -116,11 +116,12 @@ def tttr2xfcs (y,num,NcascStart,NcascEnd, Nsub):
                 
 
                 #Old method
-                #i1= np.in1d(y,y+lag,assume_unique=True)
-                #i2= np.in1d(y+lag,y,assume_unique=True)
+                i1= np.in1d(y,y+lag,assume_unique=True)
+                i2= np.in1d(y+lag,y,assume_unique=True)
                 
                 #New method, cython
-                i1,i2 = fib4.dividAndConquer(y, y+lag,y.shape[0]+1)
+                # i1,i2 = fib4.dividAndConquer(y, y+lag,y.shape[0]+1)
+
 
                 #If the weights (num) are one as in the first Ncasc round, then the correlation is equal to np.sum(i1)
                 

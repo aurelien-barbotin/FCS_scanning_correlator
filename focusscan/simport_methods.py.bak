@@ -229,10 +229,10 @@ def Import_tiff(filename,par_obj,win_obj):
 		self.win_obj.image_status_text.showMessage("Correlating carpet: File " +str(self.win_obj.file_import.file_index+1)+' of '+str(self.win_obj.file_import.file_list.__len__()))
 		self.win_obj.app.processEvents()
 		if win_obj.last_in_list == False:
-			print('moving to next file')
+			print 'moving to next file'
 			win_obj.file_import.load_next_file()
 		else:
-			print('finished with all files')
+			print 'finished with all files'
 			win_obj.file_import.post_initial_import()
 	win_obj.diag.import_data_fn = import_data_fn
 
@@ -279,10 +279,10 @@ def Import_lsm(filename,par_obj,win_obj):
 		self.win_obj.app.processEvents()
 
 		if win_obj.last_in_list == False:
-			print('moving to next file')
+			print 'moving to next file'
 			win_obj.file_import.load_next_file()
 		else:
-			print('finished with all files')
+			print 'finished with all files'
 			win_obj.file_import.post_initial_import()
 
 
@@ -540,11 +540,11 @@ def Import_msr(fname, par_obj,win_obj):
 			self.win_obj.app.processEvents()
 			#Is it the last file in the list
 			if self.win_obj.last_in_list == False:
-				print('moving to next file')
+				print 'moving to next file'
 
 				self.win_obj.file_import.load_next_file()
 			else:
-				print('finished with all files')
+				print 'finished with all files'
 				self.win_obj.file_import.post_initial_import()
 	
 	
@@ -585,7 +585,7 @@ class Import_lif():
 		
 		count = 0
 		for neighbor1 in root.findall(".//Element"):
-			for nun in neighbor1.findall("./Memory"):
+		   for nun in neighbor1.findall("./Memory"):
 				if int(nun.attrib['Size']) >0 :
 					ele = neighbor1.find('.//ATLConfocalSettingDefinition');
 					try:
@@ -814,7 +814,7 @@ class Import_lif():
 			self.win_obj.app.processEvents()
 			#Is it the last file in the list
 			if self.win_obj.last_in_list == False:
-				print('moving to next file')
+				print 'moving to next file'
 
 				self.win_obj.file_import.total_carpets.append(self.parObj.selList.__len__())
 				self.win_obj.file_import.load_next_file()
@@ -822,7 +822,7 @@ class Import_lif():
 				
 				
 			else:
-				print('finished with all files')
+				print 'finished with all files'
 				self.win_obj.file_import.post_initial_import()
 				
 		   
