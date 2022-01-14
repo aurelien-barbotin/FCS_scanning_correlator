@@ -1167,7 +1167,10 @@ class Window(QWidget):
 		#print 'carp',self.carpet_img.shape
 		X, Y = np.meshgrid(np.arange(0,img.shape[1]+1),carp_scale)
 		self.corr_carpet = self.plt2.pcolormesh(Y,X,self.carpet_img,cmap='jet')
-		self.plt2.set_xlim(0,objId.corrArrScale[-1])
+		"""try:
+			self.plt2.set_xlim(0,objId.corrArrScale[-1])
+		except:
+			print("Miaou")"""
 
 		#Plot the interpolation iensity profile to the left.
 		im1 = self.plt3.imshow(sum_img.reshape(objId.CH0_arrayColSum.shape[0],1),extent=[0,5,0,img.shape[1]],interpolation = 'nearest',aspect='auto',cmap=cm.Reds_r);
@@ -1177,7 +1180,11 @@ class Window(QWidget):
 		#if self.bleach_corr_on:
 		#	self.plt2.text(0, 0, 'photobleaching correction on',transform=self.plt2.transAxes,withdash=True)
 		if self.bleach_corr_on:
-			self.plt1.text(0, 0.1, 'photobleaching correction on',transform=self.plt1.transAxes,withdash=True,fontdict=dict(color='green', alpha=0.5,fontsize=18))
+			pass
+			"""self.plt1.text(0, 0.1, 'photobleaching correction on',
+                  transform=self.plt1.transAxes,withdash=True,
+                  fontdict=dict(color='green', alpha=0.5,fontsize=18))"""
+    
 
 		self.canvas1.draw()
 		self.plt1.cla()
@@ -1286,7 +1293,8 @@ class Window(QWidget):
 						self.plt1.set_xscale('log');
 						self.plt1.set_ylabel('Correlation', fontsize=12)
 						if self.bleach_corr_on:
-							self.plt1.text(0.1, 0.1, 'photobleaching correction on',transform=self.plt1.transAxes,withdash=True,fontdict=dict(color='green', alpha=0.5,fontsize=14))
+							pass
+							#self.plt1.text(0.1, 0.1, 'photobleaching correction on',transform=self.plt1.transAxes,withdash=True,fontdict=dict(color='green', alpha=0.5,fontsize=14))
 
 						if self.clickedS1 != None  and self.clickedS2 != None:
 							for b in range(self.clickedS1,self.clickedS2):
