@@ -531,9 +531,10 @@ class scanObject():
         # subtract mean and pad with zeros to twice the size
         a_mean = a.mean().astype(np.float64)
         #Has the padding in
-        a = np.pad(a-a_mean, a.size//2, mode='constant')
+        a = np.pad(a-a_mean, hf_sz, mode='constant')
         M = np.int32((AC[:,0])*self.deltat/1000.0)
         c = np.zeros((AC.shape[0])).astype(np.float64)
+        print(hf_sz,size)
         ct = 0
         for tau in M:
             c[ct] = np.var(a[hf_sz:-hf_sz]*a[tau:size+tau])

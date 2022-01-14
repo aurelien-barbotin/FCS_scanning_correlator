@@ -1,4 +1,6 @@
-from PyQt5 import QtGui, QtCore
+from PyQt5 import QtCore
+from PyQt5 import QtWidgets as QtGui
+
 from PyQt5.QtWidgets import QMainWindow
 import matplotlib
 

@@ -7,7 +7,7 @@ import sys,os
 from PyQt5 import QtGui, QtCore
 from PyQt5.QtWidgets import QMainWindow,QComboBox, QDoubleSpinBox, QAction, QWidget, QLabel,QTreeView,QAbstractItemView
 from PyQt5.QtWidgets import QSpinBox,QListView,QHBoxLayout,QPushButton,QTextEdit,QTableWidget,QVBoxLayout,QLineEdit,QSplitter
-from PyQt5.QtWidgets import QCheckBox, QStatusBar,QApplication,QTabWidget, QGroupBox,QFileDialog
+from PyQt5.QtWidgets import QCheckBox, QStatusBar,QApplication,QTabWidget, QGroupBox,QFileDialog, QTreeView, QFileDialog
 from PyQt5.Qt import QIcon
 import matplotlib
 matplotlib.use('Agg') # before import pylab
@@ -68,19 +68,19 @@ class FileDialog_2(QFileDialog):
 		self.parent = parent
 		self.setOption(self.DontUseNativeDialog, True)
 		self.setFileMode(self.ExistingFiles)
-		self.tree = self.findChild(QtGui.QTreeView)
+		self.tree = self.findChild(QTreeView)
 		
 	
 	def done(self, intv, override_list=None):
 		#Function gets fired when the dialog is closed. intv1 is positive if a selection is made.
-		super(QtGui.QFileDialog, self).done(intv)
+		super(QFileDialog, self).done(intv)
 
 		#This is how we extract the deteilas for the multiple files.
 		inds = self.tree.selectionModel().selectedIndexes()
 		files = []
 		for i in inds:
 			if i.column() == 0:
-				files.append(os.path.join(str(self.directory().absolutePath()),str(i.data().toString())))
+				files.append(os.path.join(str(self.directory().absolutePath()),str(i.data())))
 		#self.selectedFiles = files
 		
 		self.close()

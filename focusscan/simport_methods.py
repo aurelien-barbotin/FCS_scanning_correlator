@@ -1,6 +1,6 @@
 import struct
 from xml.etree import ElementTree as ET
-from PyQt5 import QtGui, QtCore
+from PyQt5 import QtGui, QtCore, QtWidgets
 from PyQt5.QtWidgets import QDialog 
 import warnings
 import numpy as np
@@ -19,10 +19,10 @@ class dialog_import(QDialog):
 			#Creates window with the data files which need loading.        
 			self.main_dialog_win = QDialog(self)     
 			self.main_dialog_win.setWindowTitle("Select Images to Import")
-			vbox0 = QtGui.QVBoxLayout()
-			hbox1 = QtGui.QHBoxLayout()
-			hbox2 = QtGui.QHBoxLayout()
-			vbox1 = QtGui.QVBoxLayout()
+			vbox0 = QtWidgets.QVBoxLayout()
+			hbox1 = QtWidgets.QHBoxLayout()
+			hbox2 = QtWidgets.QHBoxLayout()
+			vbox1 = QtWidgets.QVBoxLayout()
 			
 			c =0 
 			for subindex in self.stack_holder:
@@ -30,11 +30,11 @@ class dialog_import(QDialog):
 				if self.stack_holder[subindex]['timeseries'] == True and self.stack_holder[subindex]['size'][1] > 500:
 					
 					c = c+1
-					exec("subhbox"+str(c)+" = QtGui.QHBoxLayout()")
+					exec("subhbox"+str(c)+" = QtWidgets.QHBoxLayout()")
 				
-					exec("self.main_dialog_win.check"+str(c)+" = QtGui.QCheckBox()");
+					exec("self.main_dialog_win.check"+str(c)+" = QtWidgets.QCheckBox()");
 					
-					exec("self.main_dialog_win.label"+str(c)+" = QtGui.QLabel()");
+					exec("self.main_dialog_win.label"+str(c)+" = QtWidgets.QLabel()");
 					exec("self.main_dialog_win.label"+str(c)+".setText(\""+str(self.stack_holder[subindex]['name'])+"\")")
 					
 					exec("subhbox"+str(c)+".addWidget(self.main_dialog_win.check"+str(c)+")");
@@ -43,7 +43,7 @@ class dialog_import(QDialog):
 					exec("vbox1.addLayout(subhbox"+str(c)+")");
 				
 				
-			self.main_dialog_win.button = QtGui.QPushButton('load Images')
+			self.main_dialog_win.button = QtWidgets.QPushButton('load Images')
 			hbox1.addLayout(vbox1)
 			hbox2.addWidget(self.main_dialog_win.button)
 			vbox0.addLayout(hbox1)
@@ -91,17 +91,17 @@ class dialog_import(QDialog):
 			
 			
 			self.line_sampling_win.setWindowTitle('File: '+self.stack_ind['title']+' '+self.stack_ind['name'])
-			vbox0 = QtGui.QVBoxLayout()
-			hbox1 = QtGui.QHBoxLayout()
-			hbox2 = QtGui.QHBoxLayout()
-			vbox1 = QtGui.QVBoxLayout()
+			vbox0 = QtWidgets.QVBoxLayout()
+			hbox1 = QtWidgets.QHBoxLayout()
+			hbox2 = QtWidgets.QHBoxLayout()
+			vbox1 = QtWidgets.QVBoxLayout()
 			
 			
-			self.label = QtGui.QLabel('Enter the line sampling (Hz):')
+			self.label = QtWidgets.QLabel('Enter the line sampling (Hz):')
 
-			self.input_text = QtGui.QLineEdit(str(suggest_line_time))	
-			self.cancel = QtGui.QPushButton('Cancel')
-			self.ok = QtGui.QPushButton('Ok')
+			self.input_text = QtWidgets.QLineEdit(str(suggest_line_time))	
+			self.cancel = QtWidgets.QPushButton('Cancel')
+			self.ok = QtWidgets.QPushButton('Ok')
 			hbox1.addLayout(vbox1)
 			hbox1.addWidget(self.label)
 			hbox1.addWidget(self.input_text)
@@ -116,23 +116,26 @@ class dialog_import(QDialog):
 			self.line_sampling_win.setLayout(vbox0)
 			self.input_text.setFocus(True)
 			
-			self.connect(self.cancel, QtCore.SIGNAL("clicked()"), self.cancel1)
-			self.connect(self.ok, QtCore.SIGNAL("clicked()"), self.ok_fun_1)
+			self.cancel.clicked.connect(self.cancel1)
+			self.ok.clicked.connect(self.ok_fun_1)
+			# self.connect(self.cancel, QtCore.SIGNAL("clicked()"), self.cancel1)
+			# self.connect(self.ok, QtCore.SIGNAL("clicked()"), self.ok_fun_1)
 			self.line_sampling_win.show()
+            
 		def create_pixel_dwell(self):        
 			self.dialog_dwell_win = QDialog(self.win_obj)     
 			
 			self.dialog_dwell_win.setWindowTitle('File: '+self.stack_ind['title']+' '+self.stack_ind['name'])
-			vbox0 = QtGui.QVBoxLayout()
-			hbox1 = QtGui.QHBoxLayout()
-			hbox2 = QtGui.QHBoxLayout()
-			vbox1 = QtGui.QVBoxLayout()
+			vbox0 = QtWidgets.QVBoxLayout()
+			hbox1 = QtWidgets.QHBoxLayout()
+			hbox2 = QtWidgets.QHBoxLayout()
+			vbox1 = QtWidgets.QVBoxLayout()
 			
 			
-			self.label = QtGui.QLabel('Enter the pixel dwell time (us):')	
-			self.input_text = QtGui.QLineEdit('')	
-			self.cancel = QtGui.QPushButton('Cancel')
-			self.ok = QtGui.QPushButton('Ok')
+			self.label = QtWidgets.QLabel('Enter the pixel dwell time (us):')	
+			self.input_text = QtWidgets.QLineEdit('')	
+			self.cancel = QtWidgets.QPushButton('Cancel')
+			self.ok = QtWidgets.QPushButton('Ok')
 			hbox1.addLayout(vbox1)
 			hbox1.addWidget(self.label)
 			hbox1.addWidget(self.input_text)
@@ -147,23 +150,25 @@ class dialog_import(QDialog):
 			self.dialog_dwell_win.setLayout(vbox0)
 			self.input_text.setFocus(True)
 			
-			self.win_obj.connect(self.cancel, QtCore.SIGNAL("clicked()"), self.cancel2)
-			self.win_obj.connect(self.ok, QtCore.SIGNAL("clicked()"), self.ok_fun_2)
+			self.cancel.clicked.connect(self.cancel2)
+			self.ok.clicked.connect(self.ok_fun_2)
+			# self.win_obj.connect(self.cancel, QtCore.SIGNAL("clicked()"), self.cancel2)
+			# self.win_obj.connect(self.ok, QtCore.SIGNAL("clicked()"), self.ok_fun_2)
 			self.dialog_dwell_win.show()
 		def create_use_settings(self):        
 			self.use_settings_win = QDialog(self.win_obj)     
 			
 			self.use_settings_win.setWindowTitle('File: '+self.stack_ind['title']+' '+self.stack_ind['name'])
-			vbox0 = QtGui.QVBoxLayout()
-			hbox1 = QtGui.QHBoxLayout()
-			hbox2 = QtGui.QHBoxLayout()
-			vbox1 = QtGui.QVBoxLayout()
+			vbox0 = QtWidgets.QVBoxLayout()
+			hbox1 = QtWidgets.QHBoxLayout()
+			hbox2 = QtWidgets.QHBoxLayout()
+			vbox1 = QtWidgets.QVBoxLayout()
 			
 			
-			self.label = QtGui.QLabel('Use parameters for remaining images?')	
-			self.input_text = QtGui.QLineEdit('')	
-			self.yes = QtGui.QPushButton('Yes')
-			self.no = QtGui.QPushButton('No')
+			self.label = QtWidgets.QLabel('Use parameters for remaining images?')	
+			self.input_text = QtWidgets.QLineEdit('')	
+			self.yes = QtWidgets.QPushButton('Yes')
+			self.no = QtWidgets.QPushButton('No')
 			hbox1.addLayout(vbox1)
 			hbox1.addWidget(self.label)
 			hbox2.addStretch()
@@ -740,18 +745,18 @@ class Import_lif():
 			
 
 		def create_main_frame(self):        
-			self.lif_import_win = QtGui.QWidget()        
+			self.lif_import_win = QtWidgets.QWidget()        
 
 			
 			self.setWindowTitle("Select Images to Import from: "+self.parObj.fname.split("/")[-1])
-			vbox0 = QtGui.QVBoxLayout()
-			hbox1 = QtGui.QHBoxLayout()
-			hbox2 = QtGui.QHBoxLayout()
-			vbox1 = QtGui.QVBoxLayout()
+			vbox0 = QtWidgets.QVBoxLayout()
+			hbox1 = QtWidgets.QHBoxLayout()
+			hbox2 = QtWidgets.QHBoxLayout()
+			vbox1 = QtWidgets.QVBoxLayout()
 
-			self.series_list_view = QtGui.QTreeView()
-			self.series_list_view.setSelectionMode(QtGui.QAbstractItemView.ExtendedSelection)
-			self.series_list_model = QtGui.QStandardItemModel()
+			self.series_list_view = QtWidgets.QTreeView()
+			self.series_list_view.setSelectionMode(QtWidgets.QAbstractItemView.ExtendedSelection)
+			self.series_list_model = QtWidgets.QStandardItemModel()
 			self.series_list_view.setModel(self.series_list_model)
 			self.series_list_view.setHeaderHidden(True)
 			self.lif_import_win.item_list = []
@@ -761,22 +766,22 @@ class Import_lif():
 			
 			for idx in self.meta_array:
 				name = self.meta_array[idx]['name']
-				item = QtGui.QStandardItem(name)
+				item = QtWidgets.QStandardItem(name)
 				item.setCheckable(True)
 				item.setCheckState(QtCore.Qt.Unchecked)
 				self.series_list_model.appendRow(item)
 				self.lif_import_win.item_list.append(item)
 
 				linetime = float(self.meta_array[idx]['linetime'][0])*1000
-				item.setChild(0,QtGui.QStandardItem("line time: "+str(np.round(linetime,3))+" ms"))
-				item.setChild(1,QtGui.QStandardItem("line time: "+str( np.round(1/linetime*1000,1))+" Hz"))
-				item.setChild(2,QtGui.QStandardItem("dwell time: "+str( float(self.meta_array[idx]['dwelltime'])*1000000)+" us"))
-				item.setChild(3,QtGui.QStandardItem("dimensions: "+str( self.meta_array[idx]['diminfo'])))
-				item.setChild(4,QtGui.QStandardItem("number of channels: "+str( self.meta_array[idx]['lutname'].__len__())))
+				item.setChild(0,QtWidgets.QStandardItem("line time: "+str(np.round(linetime,3))+" ms"))
+				item.setChild(1,QtWidgets.QStandardItem("line time: "+str( np.round(1/linetime*1000,1))+" Hz"))
+				item.setChild(2,QtWidgets.QStandardItem("dwell time: "+str( float(self.meta_array[idx]['dwelltime'])*1000000)+" us"))
+				item.setChild(3,QtWidgets.QStandardItem("dimensions: "+str( self.meta_array[idx]['diminfo'])))
+				item.setChild(4,QtWidgets.QStandardItem("number of channels: "+str( self.meta_array[idx]['lutname'].__len__())))
 				
 				
-			self.load_data_btn = QtGui.QPushButton('load Images')
-			self.check_all_btn = QtGui.QPushButton('Check All')
+			self.load_data_btn = QtWidgets.QPushButton('load Images')
+			self.check_all_btn = QtWidgets.QPushButton('Check All')
 			hbox1.addLayout(vbox1)
 			
 			vbox0.addWidget(self.series_list_view)

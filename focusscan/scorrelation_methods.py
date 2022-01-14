@@ -178,13 +178,14 @@ def autocorrelate(a, m=16, deltat=1, normalize=False,
     # Add up every second element
     trace = (trace[:N:2]+trace[1:N+1:2])/2
     N /= 2
+    N = int(N)
     ldx =10000
     ## Start iteration for each m/2 values
     for step in range(1,k+1):
         ## Get the next m/2 values via correlation of the trace
         for n in range(1,int(m/2)+1):
             idx = int(m + n - 1 + (step-1)*m/2)
-            if len(trace[:N-(n+m/2)]) == 0:
+            if len(trace[:int(N-(n+m//2))]) == 0:
                 # This is a shortcut that stops the iteration once the
                 # length of the trace is too small to compute a corre- 
                 # lation. The actual length of the correlation function 
@@ -218,7 +219,7 @@ def autocorrelate(a, m=16, deltat=1, normalize=False,
             else:
                 G[idx,0] = deltat * (n+m/2) * 2**step
                 # This is the computationally intensive step
-                G[idx,1] = np.sum(trace[:N-(n+m/2)]*trace[(n+m/2):],
+                G[idx,1] = np.sum(trace[:N-int(n+m/2)]*trace[int(n+m/2):],
                                   dtype=dtype)
                 normstat[idx] = N-(n+m/2)
                 normnump[idx] = N
@@ -227,8 +228,8 @@ def autocorrelate(a, m=16, deltat=1, normalize=False,
             N -= 1
         # Add up every second element
         trace = (trace[:N:2]+trace[1:N+1:2])/2
-        N /= 2
-
+        N = int(N/2)
+        
     if normalize:
         #Added ldx-1 to insure only normalises valid sequences.
         G[:ldx-1,1] /= traceavg**2 * normstat[:ldx-1]
